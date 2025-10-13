@@ -94,3 +94,35 @@ class TestBooksCollector:
 
         assert 'Мастер и Маргарита' not in result
         assert result == []
+
+    def test_set_book_genre_sets_correct_genre(self, collector):
+        collector.books_genre = {'Тихий Дон': ''}
+        collector.set_book_genre('Тихий Дон', 'Классика')
+
+        assert collector.books_genre['Тихий Дон'] == 'Классика'
+
+    def test_get_book_genre_returns_correct_genre(self, collector):
+        collector.books_genre = {'Тихий Дон': 'Классика'}
+        genre = collector.get_book_genre('Тихий Дон')
+
+        assert genre == 'Классика'
+
+    def test_get_books_genre_returns_full_dictionary(self, collector):
+        collector.books_genre = {
+            'Тихий Дон': 'Классика',
+            'Винни Пух': 'Мультфильмы'
+        }
+
+        result = collector.get_books_genre()
+
+        assert result == {
+            'Тихий Дон': 'Классика',
+            'Винни Пух': 'Мультфильмы'
+        }
+
+    def test_get_list_of_favorites_books_returns_correct_list(self, collector):
+        collector.favorites = ['Тихий Дон', 'Винни Пух']
+
+        result = collector.get_list_of_favorites_books()
+
+        assert result == ['Тихий Дон', 'Винни Пух']
