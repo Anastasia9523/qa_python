@@ -54,26 +54,6 @@ class TestBooksCollector:
         assert 'Нетопырь' not in result
         assert 'Винни Пух' in result
 
-    
-    @pytest.mark.parametrize(
-
-        'book_name, genre, is_for_children',
-        [
-            ('Ониксовый шторм', 'Фантастика', True),
-            ('Том и Джерри', 'Мультфильмы', True),
-            ('Оно', 'Ужасы', False),
-            ('Нетопырь', 'Детективы', False)
-        ]
-    )
-
-    def test_get_books_for_children_filters_by_genre(self, book_name, genre, is_for_children):
-
-        collector.add_new_book(book_name)
-        collector.set_book_genre(book_name, genre)
-        result = collector.get_books_for_children()
-
-        assert (book_name in result) == is_for_children
-
     def test_add_book_in_favorites_adds_only_existing_book(self):
 
         collector.add_new_book('Ониксовый шторм')
